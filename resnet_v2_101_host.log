@@ -1,0 +1,417 @@
+(vitis-ai-tensorflow) root@fpga_a:~/resnet/resnet_v2_101# python3 resnet_v2_101_host.py
+WARNING:tensorflow:
+The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+  * https://github.com/tensorflow/io (for I/O related ops)
+If you depend on functionality not listed there, please file an issue.
+
+2021-01-16 04:29:09.839414: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2021-01-16 04:29:09.843399: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 3504035000 Hz
+2021-01-16 04:29:09.844771: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7fb8c6697600 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2021-01-16 04:29:09.844802: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+WARNING:tensorflow:From /workspace/tvm/python/tvm/relay/frontend/tensorflow_parser.py:97: load (from tensorflow.python.saved_model.loader_impl) is deprecated and willbe removed in a future version.
+Instructions for updating:
+This function will only be available through the v1 compatibility library as tf.compat.v1.saved_model.loader.load or tf.compat.v1.saved_model.load. There will be a new function for importing SavedModels in Tensorflow 2.0.
+WARNING:tensorflow:From /opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/python/tools/freeze_graph.py:233: convert_variables_to_constants (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.convert_variables_to_constants`
+WARNING:tensorflow:From /opt/vitis_ai/conda/envs/vitis-ai-tensorflow/lib/python3.6/site-packages/tensorflow_core/python/framework/graph_util_impl.py:277: extract_sub_graph (from tensorflow.python.framework.graph_util_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.extract_sub_graph`
+WARNING:tensorflow:From /workspace/tvm/python/tvm/relay/frontend/tensorflow_parser.py:155: remove_training_nodes (from tensorflow.python.framework.graph_util_impl) isdeprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.compat.v1.graph_util.remove_training_nodes`
+<tvm.contrib.utils.TempDirectory object at 0x7fb874583be0>
+Traceback (most recent call last):
+  File "/workspace/tvm/python/tvm/runtime/object.py", line 60, in __getattr__
+    return _ffi_node_api.NodeGetAttr(self, name)
+  File "tvm/_ffi/_cython/./packed_func.pxi", line 322, in tvm._ffi._cy3.core.PackedFuncBase.__call__
+  File "tvm/_ffi/_cython/./packed_func.pxi", line 257, in tvm._ffi._cy3.core.FuncCall
+  File "tvm/_ffi/_cython/./packed_func.pxi", line 246, in tvm._ffi._cy3.core.FuncCall3
+  File "tvm/_ffi/_cython/./base.pxi", line 160, in tvm._ffi._cy3.core.CALL
+AttributeError: Traceback (most recent call last):
+  [bt] (4) /workspace/tvm/build/libtvm.so(TVMFuncCall+0x65) [0x7fb89605e9a5]
+  [bt] (3) /workspace/tvm/build/libtvm.so(std::_Function_handler<void (tvm::runtime::TVMArgs, tvm::runtime::TVMRetValue*), void (*)(tvm::runtime::TVMArgs, tvm::runtime::TVMRetValue*)>::_M_invoke(std::_Any_data const&, tvm::runtime::TVMArgs&&, tvm::runtime::TVMRetValue*&&)+0x14) [0x7fb89542c2d4]
+  [bt] (2) /workspace/tvm/build/libtvm.so(tvm::NodeGetAttr(tvm::runtime::TVMArgs, tvm::runtime::TVMRetValue*)+0x31e) [0x7fb89542a21e]
+  [bt] (1) /workspace/tvm/build/libtvm.so(tvm::ReflectionVTable::GetAttr(tvm::runtime::Object*, tvm::runtime::String const&) const+0x2a2) [0x7fb8954298f2]
+  [bt] (0) /workspace/tvm/build/libtvm.so(+0x5eb742) [0x7fb895428742]
+  File "/workspace/tvm/src/node/reflection.cc", line 110
+AttributeError: GlobalVar object has no attributed name
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "resnet_v2_101_host.py", line 303, in <module>
+    test_extern_vitis_ai_resnet_v2_101()
+  File "resnet_v2_101_host.py", line 295, in test_extern_vitis_ai_resnet_v2_101
+    tvm_ops=4,
+  File "/workspace/resnet/resnet_v2_101/infrastructure.py", line 163, in verify_result
+    lib = build_module(mod, target, params=params, dpu_target=dpu_target, tvm_ops=tvm_ops)
+  File "/workspace/resnet/resnet_v2_101/infrastructure.py", line 96, in build_module
+    mod = annotation(mod, params, dpu_target)
+  File "/workspace/tvm/python/tvm/relay/op/contrib/vitis_ai.py", line 88, in annotation
+    xgraph = pyxir.frontend.tvm.from_relay(mod, params, postprocessing=None)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay.py", line 58, in from_relay
+    cvx_preprocessing=cvx_preprocessing
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_2_xgraph_converter.py", line 92, in from_relay_to_xgraph
+    cvx_prep=cvx_preprocessing)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 68, in function
+    op_idx, RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_2_xlayer_registry.py", line 125, in __base_relay_2_xlayer
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 352, in squeeze
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l2_convolution.py", line 250, in nn_conv2d
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l4_broadcast_and_reduction.py", line 83,in mean
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 724, in nn_relu
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 182, in tuple_get_item
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 210, in nn_batch_norm
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l2_convolution.py", line 250, in nn_conv2d
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 724, in nn_relu
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 182, in tuple_get_item
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 210, in nn_batch_norm
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l2_convolution.py", line 641, in nn_max_pool2d
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l2_convolution.py", line 250, in nn_conv2d
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 724, in nn_relu
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 182, in tuple_get_item
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 210, in nn_batch_norm
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l2_convolution.py", line 641, in nn_max_pool2d
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l2_convolution.py", line 250, in nn_conv2d
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 724, in nn_relu
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 182, in tuple_get_item
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 210, in nn_batch_norm
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l2_convolution.py", line 641, in nn_max_pool2d
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l2_convolution.py", line 250, in nn_conv2d
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 724, in nn_relu
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 182, in tuple_get_item
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 210, in nn_batch_norm
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l2_convolution.py", line 641, in nn_max_pool2d
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l1_basic.py", line 65, in add
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l2_convolution.py", line 250, in nn_conv2d
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 440, in transpose
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l2_convolution.py", line 730, in nn_pad
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l3_math_and_transform.py", line 198, in reshape
+    **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 105, in call
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_2_xlayer_registry.py", line 125, in __base_relay_2_xlayer
+    RELAY_2_XLAYER, **kwargs)
+  File "/workspace/.local/lib/python3.6/site-packages/pyxir-0.1.3-py3.6-linux-x86_64.egg/pyxir/frontend/tvm/relay_tools/relay_l0_expr_and_others.py", line 101, in call
+    op_type = expr.op.name
+  File "/workspace/tvm/python/tvm/runtime/object.py", line 62, in __getattr__
+    raise AttributeError("%s has no attribute %s" % (str(type(self)), name))
+AttributeError: <class 'tvm.ir.expr.GlobalVar'> has no attribute name
+
